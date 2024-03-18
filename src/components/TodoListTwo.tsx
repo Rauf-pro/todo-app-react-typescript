@@ -45,11 +45,24 @@ const TodoListTwo: React.FC = () => {
     });
   };
 
+  const deleteHandler = (index: number) : void => {
+     const filterUsers = usersState.allUsers.filter((user, i) =>{
+        return i !== index;
+     });
+    //  const filterUsers = usersState.allUsers.filter((user, i) => i !== index); // if not use curly braces
+
+    setUsersState({
+        ...usersState,
+        allUsers: filterUsers
+    })
+  };
+
   const allUsers = usersState.allUsers.map((user, i) => (
     <div key={i}>
       <h2>{user.name}</h2>
       <h2>{user.age}</h2>
       <h2>{user.job}</h2>
+      <button onClick={() => deleteHandler(i)}>Delete user</button>
     </div>
   ));
 
